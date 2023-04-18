@@ -1,0 +1,71 @@
+\documentclass{article} % \documentclass{} is the first command in any LaTeX code.  It is used to define what kind of document you are creating such as an article or a book, and begins the document preamble
+
+\usepackage{amsmath} % \usepackage is a command that allows you to add functionality to your LaTeX code
+\usepackage{pythonhighlight}
+\usepackage[]{tikz}
+\usepackage{fancybox}
+\usepackage{amssymb}
+\usepackage{pgfplots}
+\usepackage{xskak}   
+\usepackage{matlab-prettifier}
+
+% The preamble ends with the command \begin{document}
+\begin{document} % All begin commands must be paired with an end command somewhere
+\begin{center}
+    
+    \newpage
+
+    \section*{Metodo dei residui}
+
+        \(Ax=b, \ A_{nxn}\)\\
+        \(Ax^{(k)}-b =r^{(k)}\)\\
+        \(\downarrow\)\\
+        \(Ax^{\underset{\text{Soluzione esatta}}{*}}-b=0\)\\
+
+    Il residuo è il vettore nullo \(\rightarrow \ x=x^* \) \\
+    In ogni altro caso \(A\tilde{x} \neq b \rightarrow A\tilde{x} - b \neq 0\)\\
+    Cioè \(\tilde{x} \neq x^*\)\\
+
+    \textbf{Proprietà} Sia fissato \(\tau >0\)\\
+    Se \(\frac{||r^{(k)}||}{||b||}\leq \tau\) allora \(\frac{||x^{(k)-x^*}||}{||x^*||}\leq K(A)\tau\)
+    \(\frac{||x^{(k)-x^*}||}{||x^*||}\leq K(A) \underset{\text{Supposto}\le \tau}{\frac{||r^{(k)}||}{||b||}}\leq \tau \Rightarrow \frac{||x^{(k)-x^*}||}{||x^*||}\leq K(A)\tau\)
+    \\
+    \(||x^{(x)}-x^*|| \leq \epsilon ||x^{(k+1)}||\)
+
+    \begin{lstlisting}%[mathescape=true]%
+
+        for K=0,1,2, ... , Kmax
+            r=Ax_0-b
+            x=Gx_0+c
+            if  \frac{||x-x_0||}{||x||} \lt \tau \and \frac{||r||}{||b||} <lt \tau 
+                return x_0
+            end
+            x_0=0
+        end
+    \end{lstlisting}
+
+        
+    
+    
+    M è simile ad A, \(M^{-1} ~ G ~ O\)\\
+    \(G=(I-M^{-1}A)\)\\
+    Allora M ha una "struttura semplice": diagonale triangolare superiore oppure triangolare inferiore\\
+    \(Mx=Mx-Ax+b\)\\
+    \
+    \(Mx^{k+1}=\underbrace{(M-A)x^{(k)}+b}_{\Sigma^{k} \in \mathbb{R}^n}\)\\
+    \(Mx^{k+1}=\Sigma^{(k)}\)
+
+    \subsection*{Metodi di decomposizione}
+
+    A=\(\begin{pmatrix}
+        a_{11} & a_{12} & a_{13} & ... & a_{1n}\\
+        a_{21} & a_{22} & a_{23} & ... & a_{2n}\\
+        a_{31} & a_{32} & a_{33} & ... & a_{3n}\\
+        ...\\
+        a_{n1} & a_{n2} & a_{n3} & ... & a_{nn}
+    \end{pmatrix}\)
+
+
+
+\end{center}
+\end{document} % This is the end of the document
