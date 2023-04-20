@@ -199,6 +199,56 @@
 
 
     \end{lstlisting}
+    %20 aprile 2023
+    Gauss-Seidel
+\begin{align*}
+    M=\underbrace{D-E}_{\text{Triangolare inferiore}}\\
+    N=M-A=D-E-(D-E-F)\\
+    =\cancel{D}-\cancel{E}-\cancel{D}+\cancel{E}+F=F\\
+\end{align*}
+
+\begin{align*}
+    Mx^{(k+1)}=Nx^{(k+1)}+b\\
+    (D-E)x^{(k+1)}=Fx^{(k)}+b\\
+    \text{Passo 0:}\ x^{(0)}\\
+    \text{Calcolo:}\ p=Fx^{(0)}+b\\
+    \text{Risolviamo:}\ (D-E)x^{(0)}=p\\
+    \\
+    \text{Passo 1:}\ p=Fx^{(1)}+b\\
+    \text{Risolviamo:}\ (D-E)x^{(0)}=p\\
+    \\
+    \dots
+    \\
+    \text{Passo n:}\ p=Fx^{(n)}+b\\
+    \text{Risolviamo:}\ (D-E)x^{(n)}=p\\
+\end{align*}
+
+Proprietà:
+\begin{align*}
+    |a_{ii}|>\sum_{j=1}^{n}|a_{ij}|\\
+    i\ \ a_{i1}\ a_{i2}\ ...\ a_{ii-1}\ a_{ii}\ a_{ii+1}\ ...\ a_{in}
+\end{align*}
+    Teorema di convergenza di Jacobi
+    \begin{align*}
+        ||J||_{\infty}=max_{i \in \left\{ 1,...,n\right\}} \sum_{j=1}^{n} \frac{|a_{ij}|}{|a_{ii|}}\\
+        \text{Fissato i}\ \sum_{j=1}^{n} \frac{|a_{ij}|}{|a_{ii|}}= \frac{|a_{i1}|}{|a_{ii|}}+\frac{|a_{i2}|}{|a_{ii|}}+
+        ...+\frac{|a_{ii-1}|}{|a_{ii|}}+\frac{|a_{ii+1}|}{|a_{ii|}}+...+\frac{|a_{in}|}{|a_{ii|}}=\\
+        \frac{|a_{i1}|+|a_{i2}|+...+|a_{ii-1}|+|a_{ii+1}|+...+|a_{in}|}{|a_{ii|}}=\\
+        \frac{\sum_{j=1}^{n}|a_{ij}|}{|a_{ii}|}=\frac{1}{|a_{ii}|} \times \sum_{j=1}^{n}|a_{ij}|\\
+        \text{Per i=1}\ \frac{1}{|a_{11}|}\sum_{j=1}^{n}|a_{1j}|=s1\\
+        \text{Per i=2}\ \frac{1}{|a_{22}|}\sum_{j=1}^{n}|a_{2j}|=s2\\
+        \dots\\
+        \text{Per i=n}\ \frac{1}{|a_{nn}|}\sum_{j=1}^{n}|a_{nj}|=sn\\
+    \end{align*}
+    Quindi:
+    \begin{align*}
+        ||x^{(k+1)}-x^{(k)}||_2 < \tau\\
+        ||x^{(k)}-x^{(*)}|| \leq\\
+        ||G^k||_{\infty}||x_0||_2
+    \end{align*}
+    No alla altra dimostrazione
+
+    %Inter-geometrica metti immagine o sbattitene
     
 
 
