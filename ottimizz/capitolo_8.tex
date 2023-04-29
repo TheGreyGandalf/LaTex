@@ -1,0 +1,89 @@
+\chapter[Knapsack problem]{}
+\section{}
+\textbf{Istanza del problema}
+
+\dfn{}{
+
+\begin{enumerate}
+    \item Insieme N=\{1,2,\dots,n\} di n oggetti
+    \item Profitto $P_j$ ($P_j>0 \in \mathbb{Z}_+$)ed un peso $X_j \geq 0 \in \mathbb{Z}_+$
+    \item Capacità dello zaino $c \in \mathbb{Z}_+$ 
+ \end{enumerate}
+
+ \textbf{Obiettivo:}
+
+ Il Knapsack problem richiede di trovare un sottoinsieme di oggetti $S^* \subseteq N$ di profitto massimo e peso minore o uguale alla capacità dello zaino.
+ Dato un sottoinsieme $S \subseteq N$ di oggetti:
+
+ \[
+    P(S)=\sum_{J \in S} P_J \quad W(J)=\sum_{J \in S} W_J
+\]
+
+Trovare $S^* \subseteq N$ tale che $P(S^*)$ è massimo e $W(S^*) \leq c$
+}
+
+Il costo di queste operazioni si attesta di $2^n$, dove n è il numero di oggetti da massimizzare
+
+\[
+    x_j=\left\{
+        \begin{array}{ll}
+        1 & \text { if item } j \text { is selected } \\
+         0 & \text { otherwise }
+        \end{array} \forall j \in N=\{1,2, \ldots, n\}
+         \right.
+\]
+
+\clm{$\operatorname{ILP}_{\mathrm{KP}}$}{}{
+    \begin{equation}
+        \begin{aligned}
+        & z\left(\mathrm{ILP}_{\mathrm{KP}}\right)=\max \sum_{j \in N} p_j x_j \quad \text{Quando è selezionato}\\
+        & \text { subject to } \sum_{j \in N} w_j x_j \leq c \text {, } \quad \text{Peso $\leq$ Capacità}\\
+        & x_j \in\{0,1\}, \quad \forall j \in N . \\
+        &
+        \end{aligned}
+        \end{equation}
+}
+
+\ex{}{
+
+\begin{equation*}
+    \begin{array}{l|cccl}
+    \hline \text { item } & p_j & w_j & \frac{p_j}{w_j} & \text { efficiency } \\
+    \hline j=1 & 6 & 2 & \frac{6}{2} & =3 \\
+    j=2 & 5 & 3 & \frac{5}{3} & \approx 1.66 \\
+    j=3 & 8 & 6 & \frac{8}{6} & \approx 1.33 \\
+    j=4 & 9 & 7 & \frac{9}{7} & \approx 1.28 \\
+    j=5 & 6 & 5 & \frac{6}{5} & =1.2 \\
+    j=6 & 7 & 9 & \frac{7}{9} & \approx 0.77 \\
+    j=7 & 3 & 4 & \frac{3}{4} & =0.75 \\
+    \hline
+    \end{array}
+\end{equation*}
+
+\begin{equation*}
+    \begin{array}{rrrrrrrrr}
+    \max \quad 6 x_1&+5 x_2&+8 x_3&+9 x_4&+6 x_5&+7 x_6&+3 x_7 & \\
+    2 x_1&+3 x_2&+6 x_3&+7 x_4&+5 x_5&+9 x_6&+4 x_7 \leq & 9 \\
+    x_1, & x_2, & x_3, & x_4, & x_5, & x_6, & x_7 \in & \{0,1\}
+    \end{array}
+\end{equation*}
+Una soluzione ottima è:
+
+$$
+x_1^*=1, x_2^*=0, x_3^*=0, x_4^*=1, x_5^*=0, x_6^*=0, x_7^*=0
+$$
+Il valore della soluzion ottima è $z( ILP_{KP} ) = 15$
+
+\textbf{Soluzione Euristica greedy}
+
+\[
+    \begin{array}{c}
+        x_1=1,x_2=2, x_7=1\\
+        W(\{1,2,7\})=9 \quad P(\{1,2,7\})=14 \text{ Non ottima!}\\
+        \text{La soluzione ottima sarebbe $x_1=1,x_4=1, z( ILP_{KP} ) = 15$}
+    \end{array}
+
+\]
+
+}
+

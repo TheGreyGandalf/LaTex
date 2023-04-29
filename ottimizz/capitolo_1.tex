@@ -1,0 +1,57 @@
+\chapter{}
+\section{Linear programming LP}
+Date \textbf{n} variabili continue, funzione 
+obiettivo lineare e \textbf{m} vincoli lineari (semispazi)
+\ex{Forma generale di un LP}{
+$z(LP)=max \sum^n_{j=1} c_jx_j$
+
+Vincoli: $\sum^n_{j=1} a_{ij}x_j \leq b_i \ \ \ \forall i \in \{1,2,…,n\}, x_j \geq 0, \forall\ \  j \in \{1,2,…,n\}$
+$c^{n-1} \ \ A^{n*m} \ \ b^{m-1}$
+}
+
+\textbf{Notazione matriciale}\newline
+$z(LP)=max\ c^{T (\text{trasposta})}x \ \ A^{\text{matrice}}x \leq b \ \ x \geq 0$
+
+$$
+x=\begin{bmatrix}
+x_1\\
+x_2\\ ...\\ x_n
+\end{bmatrix} \text{Vettore colonna di n variabili continue}
+$$
+$$
+c=\begin{bmatrix}
+c_1\\
+c_2\\ ...\\ c_n
+\end{bmatrix} \text{Vettore colonna di coefficienti f obiettivo}
+$$
+
+$$
+b=\begin{bmatrix}
+b_1\\
+b_2\\ ...\\ b_n
+\end{bmatrix} \text{Vettore colonna dei RHS dei vincoli (termini noti)}
+$$
+
+$$
+A=\begin{bmatrix}
+a_{11}\ a_{12}\ ...\ a_{1n}\\
+a_{21}\ a_{21}\ ... \ a_{2n}\\ 
+...\ ...\ ...\ ...\\ 
+a_{m1}\ a_{m2}\ ...\ a_{mn}
+\end{bmatrix} \text{Matrice dei coefficienti dei vincoli}
+$$
+
+\dfn{Intersezione di due iperpiani $(\tilde{x_1}, \tilde{x_2})$}{
+    $$
+    x = \begin{cases}
+        ax_1+bx_2+c=0 \\
+        rx_1+sx_2+t=0 \\
+     \end{cases}\\ a=-1, b=1,c=-2\\r=8,s=2,t=-19
+     $$
+}
+
+\ex{Esempio:}{
+    $$
+    (\tilde{x_1}, \tilde{x_2})= \LARGE(\frac{c*s-b*t}{b*r-a*s},\frac{a*t-c*r}{b*r-a*s}) = \frac{-2*2-1(-19)}{1*8-(-1)2},\frac{-1*(-19)-(-2)8}{1*8-(-1)*2}=(\frac{15}{10},\frac{35}{10})=(\frac{3}{2},\frac{7}{2})
+     $$
+}

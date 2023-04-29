@@ -1,0 +1,383 @@
+\chapter{}
+\section{Problema duale}
+Problema duale del problema già affrontato, in questo caso lo scopo è trovare degli Upper-BoundProblema duale del problema già affrontato, 
+in questo caso lo scopo è trovare degli Upper-Bound
+
+\ex{}{
+$$
+\text{Max }4 x_1+x_2+5 x_3+3 x_4\\\left(x_1\right) x_1-x_2-x_3+3 x_4 \leqslant 1 \\\left(y_2\right) 5 x_1+x_2+3 x_3+8 x_4 \leqslant 55 \\{ }{\left(y_3\right)}-x_1+2 n_2+3 n_3-5 n_4 \leq 3
+\\ x_1, x_2, x_3, x_4 \geqslant 0 
+$$
+
+$
+\hat{x_1}=1,\hat{x_2}=0,\hat{x_3}=0,\hat{x_4}=0,z=4 \text{ Lower-Bound}
+$
+
+y1,y2,y3 sono moltiplicatori dei vincoli, per ottenere un Bound valido, essi devono essere $\geq$ della funzione obiettivo
+
+\textbf{Moltiplicando la seconda riga per $\large \frac{5}{3}$}
+
+$\Large \frac{25}{3} x_1+\frac{5}{3} x_2+5 x_3+\frac{40}{3} x_4 \leq \frac{275}{3}$ I termini sono tutti $\leq$ della funzione Obiettivo
+
+$\Large 4 x_{1}+x_{2}+5 x_{3}+3 x_{4} \leqslant \frac{25}{3} x_{1}+\frac{5}{3} x_{2}+5 x_{3}+\frac{40}{3} x_{4} \leqslant \frac{275}{3}$ 
+Questo valore è un Upper-Bound, Non è possibile moltiplicare per un termine negativo, poiché la disuguaglianza si andrebbe a girare di segno.
+
+\textbf{Andando a sommare la seconda e la terza riga}
+
+$\Large 4 x_{1}+3 x_{2}+6 x_{3}+3 x_{4} \leqslant 58 \rightarrow$ Miglior Upper-Bound, 58 è il maggiore
+
+Upper-bound migliori si ottengono andando a ricercare combinazioni lineari dei vincoli quando abbiamo una sima per eccesso della funzione obiettivo
+
+Vincoli $\rightarrow$ si moltiplica o si somma $\rightarrow$ facendo si che i coefficienti siano sopra la sunzione obiettivo
+
+\begin{align*}
+    y_{1}+5 y_{2}-9_{3} \geqslant 4\\
+    -y_{1}+y_{2}+2 y_{3} \geqslant 1\\
+    -y_{1}+3 y_{2}+3 y_{3} \geqslant 5\\
+    y_{1},y_{2},y_{3},y_{4}\geqslant 0
+\end{align*}
+4,1,5 Sono i coefficienti della funzione obiettivo
+(Si ha ribaltato i vincoli di 90° per ottenere il duale)
+
+$$
+\left(y_{1}+5 y_{2}-y_{3}\right) x_{1}+\left(-y_{1}+y_{2}+2 y_{3}\right) x_{2}+\left(-y_{1}+3 y_{2}+3 y_{3}\right) \\
+x_{3}+\left(3 y_{1}+8 y_{2}-y_{y_{3}}\right) x_{4} \leq y_{1}+55 y_{2}+3 y_{3} \leadsto \ \text{Coefficienti dei vincoli, Da minimizzare per il miglior Upper-Bound}
+$$
+}
+
+Questi passaggi restituiscono un Upper-Bound, è necessario minimizzare questo tra i moltiplicatori 
+per cercare un \textbf{vero Upper-Bound.}
+
+\nt{
+    Forma generale di un problema duale LP
+    \begin{align*}
+        & Z(D(L P))=MIN \sum_{i=1}^{m} b_{i} y_{i} \\
+        & { }_{A}^{\operatorname{Vincolato}} \sum_{i =1}^{m} a_{i j} y_{i} \geqslant c_{j}, \forall j \in\{1,2, \ldots, n\} \\
+        & y_{i} \geq 0 \quad \forall i \in\{1,2, \ldots, m\}
+    \end{align*}
+}
+
+\clm{Regola generale passaggio Primale-Duale}{}{
+    \begin{itemize}
+        \item Variabili libere $\rightarrow$ Vincolo di uguaglianza
+        \item Variabile $\geq$ 0 $\rightarrow$ Vincolo $\geq$ 0
+        \item Vincolo $\leq$ 0 $\rightarrow$ Variabile $\geq$0
+        \item Vicolo = $\rightarrow$ Variabile libera
+    \end{itemize}
+}
+
+\ex{}{
+    \begin{align*}
+        Max \ 2 x_{1}-4 x_{2}\\
+        \left(y_{1}\right)\ -x_{1}+x_{2} \leqslant 2 \\
+        (y_2) 8 x_{1}+2 x_{2} \leq 19
+    \end{align*}
+
+n=2 m=2: Il punto di intersezione ($\tilde{x}$) viene calcolato utilizzanzo la formula
+del punto di incostro date due equazioni in n variabili 
+
+
+$\large \tilde{x}=\left[\frac{3}{2}, \frac{7}{2}\right]$
+%immagine
+
+Dati:
+\[
+x=\left[\begin{array}{l}
+    x_{1} \\
+    x_{2}\end{array}
+    \right] \quad c=\left[
+        \begin{array}{l}
+            2 \\
+            4\end{array}\right] \quad b=\left[
+            \begin{array}{c}2 \\
+            19 \end{array}\right] \quad A=\left[
+            \begin{array}{cc}
+                -1 & 1 \\
+                8 & 2
+            \end{array}\right]
+\]
+Variabili primali:
+\[
+\text { MIN } 2 y_{1}+19 y_{2} \\-y_{1}+8 y_{2} \geqslant 2 \\y_{1}+2 y_{2} \geqslant 4 \\y_{1},y_{2} \geqslant 0 
+\]
+
+Duale $\rightarrow$ Upper senza simplesso
+
+$\large \tilde{y}=\left[\frac{14}{5}, \frac{3}{5}\right]$
+%Immagine
+}
+
+\nt{
+%Da sistemare, non bello matrici così sparse
+    \textbf{Forma matriciale}
+\[
+y=\begin{bmatrix}
+    y_1 \\
+    y_2\\ 
+    \vdots\\
+     y_n
+    \end{bmatrix}   
+    \]
+    \[
+    \begin{matrix}
+        \quad A^Ty \geqslant c \\
+     \quad y A \geqslant c
+    \end{matrix}
+    \]
+    Vincoli del duale\quad 
+    \[
+    c=
+    \begin{bmatrix}
+            c_1 \\
+            c_2 \\
+            \vdots \\
+            c_n
+    \end{bmatrix}
+    \]
+    \[
+        b=
+        \begin{bmatrix}
+                b_1\\
+                b_2 \\
+                \vdots \\
+                b_n
+        \end{bmatrix}
+        \]
+\quad $b^Ty$ \ \ Funzione Obiettivo
+
+}
+
+\nt{
+    \textbf{Forma generale vincoli in forma non duale}
+        \begin{align*}
+            z(L P)=\min \sum_{i=1}^n \sum_{j=1}^m c_{i j} x_{j}\\
+            \sum_{j=1}^{n} x_{i j} \leq a_{i}, \forall i \in \{1,2, \ldots,m\}(\lambda_{i})\\
+            \sum_{i=1}^{m} x_{i j} \geqslant b_j, \forall j \in \{1,2,..., m\} (\pi_j)\\
+            \forall\ x_{i j} \geq 0\ \forall \ i \ j\\
+        \end{align*}
+}
+m e n non sono più il numero di vincoli e di variabili, ma ora indicano stazioni e depositi, nell’esempio
+
+\subsection{Da problema di massimo a problema di minimo}
+\ex{}{
+\textbf{Massimo}
+
+\[
+\begin{matrix}
+    300x_{11}&+200x_{12} & +100x_{13}&+250x_{21}&+400 x_{22}&+80 x_{23} \\ 
+     x_{11}&+x_{12} &+x_{13} &&&& \leqslant 1200,5\ (\lambda_1) \\ 
+     &&&x_{21}&+x_{22}&+x_{23} &\leqslant 1100,5(\lambda_2) \\ 
+     x_{11}&&&+x_{21}&&& \leqslant -500,5 \ (\pi_1) \\
+      & x_{12}&&&+x_{22}&& \leqslant -600,5\ (\pi_2) \\ 
+      &&x_{13}&&&+x_{23}& \leqslant -1000,5 (\pi_3)\\
+      x_{11}, x_{12}, x_{13}, x_{21}, x_{22}, x_{23} \geqslant 0\\
+\end{matrix} 
+\]\newline 
+
+Per ottenere il minimo è necessario “ribaltare” la matrice utilizzando come variabili $\pi$ e $\lambda$
+
+\textbf{Minimo}
+
+\[
+\begin{matrix}
+1200,5 \lambda_1+1100,5 \lambda_2-500,5 \pi_1-600,5 \pi_2-1000 \pi_3\\  
+    \lambda_1 &&-\pi_1&&& \geqslant-300 \\
+     \lambda_1&&&-\pi_2 && \geqslant-200 \\
+      \lambda_1&&&&-\pi_3 &\geqslant-100 \\
+       &\lambda_2&-\pi_1 &&&\geqslant-250 \\
+        &\lambda_2 &&-\pi_2 &&\geqslant-400 \\
+         &\lambda_2 &&&-\pi_3 & \geqslant-80 \\
+        \lambda_1, \lambda_2, \pi_1, \pi_2, \pi_3 \geqslant 0\\
+\end{matrix}
+\]
+\newline
+
+$\lambda_1=0, \lambda_2=0, \pi_1=250, \pi_2=200, \pi_3=80 \\
+-500,5 \cdot 250-600,5 \cdot 200-1000,5 \cdot 80=-325268$
+
+Il numero trovato è un upper-bound del problema, cioè: 325265 $leq$ Z(LP)
+
+\[
+\begin{array}{c}
+-Z (O (L P))=min \sum_{i=1}^n a_i \lambda_i+\sum_{j=1}^m-b_j \pi_j \\
+\lambda_i-\pi_j \geqslant-c_{i j} \quad \forall i \epsilon\{1,2, \ldots, n\},\quad \forall j \epsilon\{1,2, \ldots, m\} \\
+\lambda i \geqslant 0 \quad \forall i \in\{1, 2, \ldots, m\} \\
+
+\pi_j \geqslant 0 \quad \forall j \in\{1,2, \ldots, m \mid \}\\
+\end{array}
+\]
+}
+
+\input{duale_del_duale}
+
+\nt{
+    \textbf{Forma generica di un LP e del duale }
+
+    \begin{itemize}
+        \item n variabili
+        \item \begin{itemize}
+            \item m1 variabili non negative
+            \item m-m1 variabili libere
+        \end{itemize}
+        \item m vincoli
+        \item \begin{itemize}
+            \item m1 disuguaglianze
+            \item m-m1 disuguaglianze
+        \end{itemize}
+    \end{itemize}
+
+\[
+    \begin{array}{c}
+z(LP)= MAX \sum_{j=1}^{n} c_{j} x_{j}\\ 
+(y_i)\ \sum_{j=1}^{n} a_{i j} x_j \leqslant b_i \quad i \in\{1, 2, \ldots, m_1\} \\
+(y_i)\ \sum_{j=1}^{n} a_{i j} x_j = b_i \quad i \in\{m_1+1, 2, \ldots, m\} \\
+  x_j\geq 0, \quad j \in\{1, 2, \ldots, m\} \\
+    \end{array}
+\]
+
+$$
+\Updownarrow
+$$
+
+\[
+    \begin{array}{c}
+z(D(LP))= MIN \sum_{j=1}^{m} b_{i} y_{i}\\ 
+(x_j)\ \sum_{j=1}^{m} a_{i j} y_j \geqslant c_j \quad \forall j \in\{1, 2, \ldots, n_1\} \\ 
+(x_j)\ \sum_{j=1}^{m} a_{i j} y_j = c_j \quad \forall j \in\{n_1+1, 2, \ldots, n\} \\
+ y_i\geq 0, \quad \forall i \in\{1, 2, \ldots, m_1\}   \\
+    \end{array}
+\]
+}
+
+\subsubsection{Proprietà del duale}
+Non si massimizzano le costanti, per esempio $Max \sum \alpha_i$ non ha senso
+
+\textbf{Generazione di ulteriori vincoli da quelli già disponibili:}
+
+Se si volessero generare altri vincoli validi si potrebbe procedere andando a sommare i vincoli già esistenti 
+anche moltiplicati per una costante.
+
+\ex{}{
+\[
+    \begin{array}{c}
+        (y_1) 2 \cdot\left(2 w_{1}+3 x_{2}\right) \leqslant 3 \cdot 2\\
+\left(y_{1}\right) 2 \cdot\left(7 x_{1}+4 x_{2}\right) \leqslant 7 \cdot 2\\ \downarrow \\ 18 x_{1}+14 x_{2} \leqslant 20
+    \end{array}
+\]
+}
+
+\thm{Teorema della dualità debole}{
+    Dati $\left(\bar{x}_{1}, \bar{x}_{2}, \ldots, \bar{x}_{n}\right)$ soluzione ammissibile primale 
+    e $*\left(\bar{y}_{1}, \bar{y}_{2}, \ldots, \bar{y}_{m}\right)*$ soluzione ammissibile duale, abbiamo: $\sum_{s=1}^n c_j \bar{x}_j \leqslant \sum_{i=1}^m b_i \bar{y}_i$
+}
+
+\begin{myproof}[Dimostrazione dualità debole]
+    Per ogni coppia di soluzioni ammissibili primale-duale abbiamo:
+
+    $$
+    \sum_{j=1}^{n} c_{j} \bar{x}_{j} \leqslant \sum_{I=1}^{n}\left(\underset{\text{Ammissibilità duale}}{\sum_{i=1}^{m} a_{i j} \bar{y}_{i}}\right) \bar{x}_{j}=\sum_{i=1}^{m}\left(\underset{\text{Ammissibilità primale}}{\sum_{j=1}^{n} a_{i j} \bar{x}_{j}}\right) \bar{y}_{i} \leqslant \sum_{i=1}^{m} b_{i} \bar{y}_{i}
+    $$
+
+    \begin{itemize}
+        \item Ammissibilità duale
+        \begin{itemize}
+            \item $c_j \leqslant \sum_{j=1}^{n} a_{i j} \bar{x}_{J}$
+        \end{itemize}
+        \item Ammissibilità primale
+        \begin{itemize}
+            \item $\sum_{j=1}^{n} a_{i j} \bar{x}_{j} \leqslant b_i$
+        \end{itemize}
+    \end{itemize}
+\end{myproof}
+
+\thm{Teorema della dualità forte}{
+Dati $\left(\tilde{x}_{1}, \tilde{x}_{2}, \ldots, \tilde{x}_{m}\right)$ soluzione ottima primale, $\left(\tilde{y}_{1}, \tilde{y}_{2}, \ldots, \tilde{y}_{m}\right)$ soluzione ottima dove abbiamo: 
+
+$$
+\quad \sum_{j=1}^{n} c_{j} \tilde{x}_{j}=\sum_{i=1}^{m} b_{i} \tilde{y}_{i} \ \ (A)
+$$
+}
+
+\begin{myproof}
+    Costruiamo un duale $\left(\tilde{y}_{1}, \tilde{y}_{2}, \ldots, \tilde{y}_{m}\right)$ che soddisfi (A), allora per la dualità debole è ottima.
+
+    Dal primale in forma canonica introduco le variabili di slack $\fcolorbox{red}{white}{$(*)$}$
+    
+    $x_{m+i}=b_{i}-\sum_{j=1}^{m} a_{ij}  x_{j}, \forall i \in\{1,2, \ldots, m\}$
+    
+    Eseguendo l’algoritmo del simplesso: $z(LP)=z^*+\sum^{n+m}_{k=1}\tilde{c}_kx_k$ con $z^*$ si ottiene l’ultima riga del $\fcolorbox{red}{white}{$(B)$}$ dizionario ottimo
+    
+    Dove $\tilde{C}{k} \leqslant 0, \forall k \in\{1,2, \ldots, m+m\} ( \tilde{C}{k}=0$ se variabile di base)    
+
+    Definiamo $\fcolorbox{red}{white}{$(**)$}$
+
+$\fcolorbox{red}{white}{$\tilde{y}_{1}=-\tilde{C}_{n+i}$}, \forall\ i \in\{, \ldots, m\}$
+
+Quindi abbiamo da $\fcolorbox{red}{white}{$B$}$, usando $\fcolorbox{red}{white}{$*$}$ ed $\fcolorbox{red}{white}{$**$}$ :
+
+\[
+    \begin{array}{c}
+\sum_{J=1}^m c_j x_j=z^*+\sum_{j=1}^n \tilde{c}_j x_j-\sum_{i=1}^m \underset{\tilde{y}_i=-\tilde{cj_{n+1}}}{\tilde{y}_{i}}\underset{x_{n+1}}{\left(b_i-\sum_{j=1}^n a_{i j} x_j\right)} \\
+\sum_{j=1}^n c_j \fcolorbox{red}{white}{$x_j$} =\left(z^*-\sum_{i=1}^m b_i \tilde{y}_i\right)+\sum_{j=1}^n\left(\tilde{c}_j+\sum_{i=1}^m a_{i j} \tilde{y}\right) \fcolorbox{red}{white}{$x_j$}\\
+ \text{Valida per ogni scelta} \\
+ \downarrow \\
+  \text{Quindi abbiamo che:}
+    \end{array}
+\]
+
+(Perché si verifichi l’uguaglianza si devono verificare 2 condizioni, che la prima parte sia uguale a 0, la seconda sommatoria sia uguale a 0)
+
+\[
+    \begin{array}{c}
+        (I)\ z^{*}=\sum_{i=1}^{m} b_{i} \tilde{y}_{i} \quad\\
+         \text{Quindi dalla dualità debole}\\
+          \text{Abbiamo una soluzione ottima}
+    \end{array}
+    \begin{array}{c}
+(II)\ c_{J}=\tilde{c_{J}}+\sum_{i=1}^{m} a_{i j} \tilde{y}_{i}, \forall\ j\ \in \{1, \ldots, m\}\\ 
+\text{Dato che }\tilde{c}_k \leqslant 0\\
+ \sum_{i=1}^m a_{ij} \tilde{y}_i \geqslant c_j \in \tilde{y}_i \geqslant 0, \forall i \in \{1,\ldots, m \}\\
+  \text{Quindi } \tilde{y} \text{ è una soluzione ammissibile}
+    \end{array}
+\]
+
+\[
+    \begin{array}{c}
+    \text{Quindi}\\
+     \Downarrow\\
+    z^{*}=\sum_{j=1}^{n} C_{j} \tilde{k}_{j}=\sum_{i=1}^{m} b_{i} \tilde{y}_{i}\\
+    \end{array}
+\]
+
+\end{myproof}
+
+\cor{Scarti complementari: (corollario di dualità forte e debole)}{
+Può essere espresso in 3 versioni, equivalenti tra loro:
+
+Siano $\left(\tilde{x}_{1}, \tilde{x}_{2}, \ldots, \tilde{x}_{n}\right)$ una soluzione ammissibile primale
+ e $\left(\tilde{y}_{1}, \tilde{y}_{2}, \ldots, \tilde{y}_{m}\right)$ una soluzione ammissibile duale, allora 
+ condizioni necessarie e sufficienti (se e solo se) e sufficienti all’ottimalità di entrambe sono:
+ \begin{enumerate}
+    \item Prima versione (A):
+    \begin{enumerate}
+        \item $\sum_{i=1}^m a_{i j} \cdot \tilde{y}i=c_j \text { oppure}\ \tilde{x}_j=0 \text { (o entrambi) } \forall\ j \in\{1, \ldots, n\}$
+        \item $\sum_{i=1}^n a_{i j} \tilde{x}_j=b_i\ \text{oppure} \ \tilde{y}_j=0 \ \text{(o entrambi)} \quad \forall i \in\{1, \ldots, m\}$
+    \end{enumerate}
+    \item Seconda versione (B):
+    \item \begin{enumerate}
+        \item $\tilde{x}_j\left(c_j-\sum_{i=1}^m a_{i j} \tilde{y}_i\right)=0$
+        \item $\tilde{y}_i\left(\sum_{i=1}^m a_{i j} \tilde{x}_j-b_i\right)=0$
+    \end{enumerate}
+    \item Terza versione (C):   Data $\left(\tilde{x}_{1}, \tilde{x}_{2}, \ldots, \tilde{x}_{n}\right)$ 
+    soluzione ammissibile primale, è soluzione ottima se e solo se esiste un vettore $\left(\tilde{y}_{1}, \tilde{y}_{2}, \ldots, \tilde{y}_{m}\right)$ tale:
+
+    \begin{enumerate}
+        \item $\sum_{i=1}^m a_{i j} \tilde{y}_i=c_j \operatorname{se} x_j>0 \quad \forall j \in\{1, \ldots,n\}$
+        \item $\tilde{y}=0\ \text{se} \sum_{j=1}^n a_{i j} \tilde{x}_i<b_i \quad \forall i \in\{1, \ldots,m\}$
+        \color{red}
+        \item $\sum_{i=1}^m a_{i j} \tilde{y}_i \geqslant c_j \quad \forall j \in\{1, \ldots, n\}$
+        \item $\tilde{y}_i \geqslant 0 \quad \forall i \in\{1, \ldots, m\}$
+        ammissibilità duale
+    \end{enumerate}
+ \end{enumerate}
+}

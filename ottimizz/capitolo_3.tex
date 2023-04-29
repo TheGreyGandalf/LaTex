@@ -1,0 +1,383 @@
+\chapter[Simplesso]{}
+\section{Ottimo in forma analitica}
+
+\nt{
+    Forma generale di un problema di LP:
+
+    $Z(L P)=\operatorname{MAX} \sum_{s=1}^{n} c_j x_{j}, \sum_{j=1}^{m} x_{s} \leqslant b, i \epsilon\{1,2, \ldots, m\}, x_{j} \geqslant 0 s \in\{1,2, \ldots, m\}$
+
+    Data una soluzione euristica, rispetta tutti i vincoli $\hat{x}$
+    
+    $\sum_{j=1}^{n} \operatorname{c}_{j}\hat{x}_j \leqslant Z(L P)$
+}
+\textbf{Linee di livello: punti in cui f è costante, i punti che possono essere ottimi in particolar modo per le linee sono i corner}
+\ex{Esempio visto numerose volte in classe}{
+    MAX $x_1+\frac{64}{100}x_2$ ,  n=2 variabili, m=2 vincoli, $f(x_1,x_2)=x_1+\frac{64}{100}x_2$
+
+$$
+50 x_{1}+31 x_2 \leqslant 250\\
+-3 x_{1}+2 x_{2} \leqslant4\\
+x_{1}, x_{2}>0
+$$
+
+Soluzione ottima: $\tilde{x}, z(L P)=\sum_{j=1}^{n} c_{j} \hat{x}_{j}$
+
+$$
+x=\left[\begin{array}{l}x_{1} \\ x_{2}\end{array}\right] \quad 
+c=\left[\begin{array}{c}1 \\ \frac{64}{100}\end{array}\right] 
+\quad A=\left[\begin{array}{cc}50 & 31 \\ -3 & 2\end{array}\right] 
+\quad b=\left[\begin{array}{c}250 \\ 4\end{array}\right]
+$$
+%grafico
+
+$N_z=(\tilde{x_1},\tilde{x_2})$
+
+$\nabla f(x)=\frac{\delta f(x)}{f(x_1)}, \frac{\delta f(x)}{f(x_2)}=[1,\frac{64}{100}]$
+
+$\tilde{x}=(\frac{396}{193},\frac{950}{193})$    $Z(LP)=\frac{984}{193}$
+}
+\section{Simplesso tramite metodo analitico}
+Per arrivare alla forma standard di un problema LP è necessario aggiungere due 
+variabili di “slack”, di modo da far comparire una uguaglianza, 
+anziché un $\geq$, oltre a questo motivo si aggiungono n variabili perché per poter 
+risolvere un sistema si devono avere m=n vincoli e variabili
+\ex{Esempio}{
+\begin{align*}
+50 x_{1}+31 x_{2}+x_{3}+\qquad=250\\
+-3 x_{1}+2 x_{2}\qquad+x_{4}=4\\
+x_{1}, x_{2}, x_{3}, x_{4} \geqslant 0\\
+\end{align*}
+
+\begin{align*}
+x_{3}=250-50 x_{1}-31 x_{2}\\ 
+x_{4}=+4+3 x_{1}-2 x_{2}\\ 
+-----------\\ 
+z=0+x_{1}+\frac{64}{100}x_{2}
+\end{align*}
+
+Dizionario: Scritto in funzione della soluzione
+$x_1=0,x_2=0,x_3=250,x_4=4$
+$$
+\begin{cases}x_{3}=250-250 x_{1} \longrightarrow 
+    \underbrace{250+50 x_1}_{x_1\geq 0}\geqslant 0 \quad x_{1} \leq 5\\
+    x_{4}=4+3 x_{1} \longrightarrow \underbrace{4+3 x_{1}}_{x_{4} \geqslant 0} \geqslant 0 
+    \quad x_{1} \geqslant\frac{4}{3}    
+\end{cases}
+$$
+Aumentando il valore di $x_1$ a 5, il valore di $x_3$ diventa 0
+\begin{align*}
+    x_{3}=250-50 x_{1}-31 x_{2} \longrightarrow x_{1}=5-\frac{31}{50} x_{2}-\frac{1}{50} x_{3}\\  
+    x_{4}=4+3\left(5-\frac{31}{50} x_{2}-\frac{1}{50} x_{3}\right)-2 x_{2}\longrightarrow =19-\frac{199}{50} x_2-\frac{3}{50} x_3\\ 
+    z=\left(5-\frac{31}{50} x_{2}-\frac{1}{50} x_{3}\right)+\frac{64}{100} x_{2}=5+\frac{1}{50} x_{2}-\frac{1}{50} x_{3}
+\end{align*}
+Nuovo dizionario:
+\begin{align*}
+    x_{1}=5-\frac{31}{50} x_{2}-\frac{1}{50 x_{3}}\\ 
+    x_{2}-19-\frac{193}{50} x_{2}-\frac{3}{50} x_{3} \\
+       ------------\\   
+    z=5+\frac{1}{50} x_{2}-\frac{1}{50} x_{3} \quad
+\end{align*}
+$x_1=5,x_2=0,x_3=0,x_4=19$ Fissiamo x2, x3
+
+$$
+\begin{cases}
+    x_{1}=5-\frac{31}{50}x_{2} \longrightarrow \underbrace{5-\frac{31}{50}}_{x_1\geq 0}\geqslant 0 \quad x_{1} \leq \frac{250}{31} \quad \\ 
+    x_{4}=19+\frac{193}{50} x_{2} \longrightarrow \underbrace{19+\frac{193}{50} }_{x_{4} \geqslant 0} \geqslant 0 \quad x_{2} \leq\frac{950}{193}    
+\end{cases}
+$$
+Incrementando $x_2$ a $\frac{950}{193}$
+\begin{align*}
+x_{4}=19-\frac{193}{50} x_{2}-\frac{3}{50} x_{3}\\
+x_{2}=\frac{950}{193}-\frac{3}{193} x_{3}-\frac{50}{193} x_{4}
+\end{align*}
+Sostituisco:
+\begin{align*}
+    x_{1}=5-\frac{31}{50}\left(\frac{950}{193}-\frac{3}{193} x_{3}-\frac{80}{193} x_{1}\right)-\frac{1}{50} x_{3}=\frac{376}{193}-\frac{2}{193} x_{3}+\frac{31}{193} x^{4}\\ 
+    Z=5+\frac{1}{50}\left(\frac{950}{193}-\frac{3}{193} x_{3}-\frac{50}{193} x_{4}\right)=\frac{964}{193}-\frac{38}{4825} x_{3}-\frac{1}{193} x_{4}
+\end{align*}
+\begin{align*}
+    x_{1}=\frac{376}{193}-\frac{2}{193} x_{3}+\frac{31}{193} x_{4}, \quad \\ 
+    x_2=\frac{950}{193}-\frac{3}{193}x_3-\frac{50}{193}x_4\\ 
+    --------------\\
+     z=\frac{984}{193}-\frac{98}{4825}-x_{3}-\frac{1}{193} x_{4}
+\end{align*}
+Soluzione del problema:
+$x_{1}=\frac{376}{193}, x_{2}=\frac{950}{193},x_3,x_4=0$
+%Fine del lungo esempio
+}
+\subsection{Revised Simpelex Algorithm}
+\textbf{Forma generica di un problema LP in forma non standard}
+$$
+\begin{gathered}
+    Z(L P)=\operatorname{MAX} \bar{C}^{\top} \bar{x} \\
+    \bar{A} x \leqslant b \text{ (Abbiamo tanti vincoli quante righe)}\\
+    x \geqslant 0
+\end{gathered}
+$$
+
+Si portano in forma standard le n variabili $\quad x=\left\{x_{1}, x_{2}, \ldots, x_{n}\right\}$
+Si aggiungono le variabili slack, cioè si aggiunge un vettore di m variabili
+\begin{align*}
+Z(LP)=C^Tx\\
+A x=b \quad \text{m Vincoli}\\
+x \geqslant 0
+\end{align*}
+
+\qs{Ipotesi}{
+\begin{enumerate}
+    \item $n>m$
+    \item $rank(A)=m$
+    \begin{enumerate}
+        \item $m$ vincoli linearmente indipendenti
+        \item $m$ variabili linearmente indipendenti
+    \end{enumerate}
+\end{enumerate}
+}
+\textbf{Idea principale}
+\begin{enumerate}
+    \item Assegnare il vettore 0 a n-m variabili (Non basic variables), così otteniamo un sistema di m equazioni in m variabili
+    \item Esprimere il valore delle m variabili e della funzione obiettivo in funzione delle n-m variabili a 0
+    \item Controllare se aumentare il valore delle n-m variabili
+\end{enumerate}
+Variabili settate a 0 $\rightarrow$ Prova di ottimalità (Ottimo locale), basata sul fatto che un LP è convesso
+\textbf{Partizione delle variabili}
+\begin{enumerate}
+    \item Basic variables
+    \begin{enumerate}
+        \item $x_B \in B \subset x$ $\left\{\begin{array}{l}B \cap \bar{B}=0 \\B \cup \bar{B}=x\end{array}\right.$$m \text{ Variabili}, |B|=m$
+    \end{enumerate}
+    \item Non basic Variables
+    \begin{enumerate}
+        \item $x_{\bar{B}} \in \bar{B} \subset x$  $n-m \text{ Variabili}, |B|=n-m$
+    \end{enumerate}
+\end{enumerate}
+$x=x_B, x_{\bar{B}}$
+
+$$
+\begin{aligned}
+    & \colorbox{red}{$A_x=b$} \quad A_B x_B+A_{\bar{B}} x_{\bar{B}}=b \\
+    & A_B x_B=b-A_{\bar{B}} x_{\bar{B}} \\
+    & \fcolorbox{red}{white}{$x_B=A_B^{-1} b-A_B^{-1} A_{\bar{B}}-x_{\bar{B}}$}
+\end{aligned}
+$$
+Dal secondo al terzo passaggio $A_B\cdot A_B^{-1}=I$ si moltiplica per l’inversa
+Nel terzo passaggio è necessario calcolare la trasposta, anche se è complesso da computare, in $x_B$ alla fine sono conosciute le variabili fuori base conosciuta l’inversa
+
+$c=x_B, x_{\bar{B}}$
+$$
+\begin{aligned}
+    & \fcolorbox{red}{red}{$c^{\top}_x$}=c_B^{\top} x_B+c_{\bar{B}}^{\top} x_{\bar{B}} \\
+    & c_B^{\top}\left(A_B^{-1} \cdot b-A_B^{-1} \cdot A_B \cdot x_{\bar{B}} \right)+c_B^{\top} x_{\bar{B}}= \\
+    & \fcolorbox{red}{white}{$c_x^{\top} =c_B^{\top} A_B^{-1} b+\left(c_{\bar{B}}-c_B^{\top} \cdot A_B^{-1} A_{\bar{B}}\right) x_{\bar{B}} $}
+\end{aligned}
+$$
+
+Se è conosciuta $A_B^{-1}$ si è a conoscenza del valore delle variabili 
+di base e della funzione obiettivo.
+$$
+\text{Dizionario} \left\{\begin{array} { l l } { x _ { B } = \tilde { b } + \tilde { A } x _ { \overline { B } } } \\ 
+    c^{\top} x=\psi + \tilde{c}^{\top}_{\bar{B}}x_{\bar{B}} \end{array}\right. \quad 
+    \text { DEVE } \left\{\begin{array}{ll}\tilde{b}=A_B^{-1} b & \psi=c_B^{\top} A_B^{-} b \\ 
+    \tilde{A}=-A^{-1}_BA_{\bar{B}}x_{\bar{B}} & \fcolorbox{red}{white}{$\tilde{C}_{\bar{B}}^{\top}=C_{\bar{B}}^{\top}-
+    \fcolorbox{red}{red}{$C_B^{\top} A_B^{-1} $}A_{\bar{B}}$}\end{array}\right. 
+$$
+
+La parte cerchiata sono i costi ridotti, cioè un optimal simplex dictionary
+ $\tilde{C}^{T}_B \leq 0$
+Dato che le variabili in B fuori base sono a 0
+$$
+\begin{cases*}
+    x_B=\tilde{b} \rightarrow \tilde{b} \rightarrow \text{Valore corrente della funzione obiettivo}  \\
+    c^T x=\psi \rightarrow \psi \rightarrow \text{Valore delle variabili di base} 
+\end{cases*}
+$$
+
+\nt{
+\textbf{Dizionario}\newline
+n variabili, m variabili libere
+
+$$
+\left(\begin{array}{l}m \\m\end{array}\right)=\frac{n !}{m !(n-m) !} \quad \text { Non si possono enumerare tutte}
+$$
+}
+
+\dfn{Soluzione di base ammissibile}{
+    Una soluzione di base ammissibile 
+    $\quad x_{B}=\tilde{b} \geqslant 0$ ha questa forma
+}
+
+\dfn{Cambiamento di base}{
+    $x_{p} \text{ con } \tilde{c}_{p} \geqslant 0$ pivot column
+
+    \begin{itemize}
+        \item     Variabili di base: $x_{B}=\tilde{b} \tilde{A}x_{B}$ una volta determinata $x_p$
+    \end{itemize}
+$$
+\begin{aligned}
+    & x_{B}=\tilde{b}+\tilde{A}_{P} x_{P} \\
+    & \text{Calcolare } y=C_{B}^{\top} A_{B}^{-1} \\
+    & y A_{B}=C_{B}^{\top} \longrightarrow y=C_{B}^{\top} A_{B}^{-1}
+\end{aligned}
+$$
+
+La pivot colum $x_p$ sarà la prima variabile fuori base tale che:
+$yA_P < c_p \longrightarrow \tilde{c}_p<0$
+}
+
+\ex{}{
+$$
+Max\ x_{1}+\frac{64}{100} x_2\\
+\begin{aligned}
+    & 50 x_{1}+3 x_{2}+x_{3} \ \ \quad=250 \quad m=4 \\
+    & -3 x_{1}+2 n_{2} \quad+x_{4}=4 \quad m=2 \\
+    & x_{1}, x_{2}, x_{3}, x_{4} \geqslant 0 \quad \ \ \ m-m=4-2=2
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+    x=\left\{x_1, x_2, k_3, x_4\right\} \quad A 
+    & =\left[\begin{array}{cccc}50 
+    & 3 & 1 & 0 \\-3 & 2 & 0 & 1
+    \end{array}\right] \quad b=\left[\begin{array}{l}250 \\
+    4\end{array}\right] c^{\top} & =\left[
+    \begin{array}{llll}1 & \frac{64}{100} & 0 & 0
+    \end{array}\right]\end{aligned}
+$$
+
+$$
+B=\{x_3,x_4\}, \bar{B}=\{x_1,x_4\}\\
+$$
+
+$$
+A_B=\left[\begin{array}{ll}1 & 0 \\
+0 & 1\end{array}\right] \quad A_{\bar{B}}=\left[\begin{array}{cc}50 & 31 \\
+-3 & 2\end{array}\right] \quad C_B^{\top}=[0,0] \quad C_{\bar{B}}^{\top}=\left[\begin{array}{ll}1
+&-\frac{64}{100}\end{array}\right]
+$$
+
+$$
+\begin{aligned}
+        & \left.A_B^{-1}=\left[\begin{array}{ll}1 & 0 \\
+        0 & 1\end{array}\right]\right] \quad \tilde{b}=\left[\begin{array}{ll}1 & 0 \\
+        0 & 1\end{array}\right] \cdot\left[\begin{array}{c}250 \\
+        4\end{array}\right]=\left[\begin{array}{c}250 \\
+        4\end{array}\right] & \text{valore var di base} \\
+        & x_B=\left[\begin{array}{l}x_B \\
+        x_A\end{array}\right]=\left[\begin{array}{c}250 \\
+        a\end{array}\right] \\
+        & \psi=[0,0]\left[\begin{array}{ll}1 & 0 \\
+        0 & 1\end{array}\right]\left[\begin{array}{c}250 \\
+        4\end{array}\right]=0\ {\text {f obiettivo per queste variabili base}} 
+        \end{aligned}
+$$
+
+\[
+\begin{aligned}
+    \begin{array}{l}
+        x_{1}=5-\frac{31}{50} x_{2}-\frac{1}{50} x_{3} \\
+        x_{4}=19-\frac{143}{50} x_{2}-\frac{3}{50} x_{3} \\
+        -----------\\
+        z=5+\frac{1}{50} x_{2}-\frac{1}{50} x_{3}
+        \end{array} \quad 
+        \tilde{A}=
+        \left[\begin{array}{cc}
+        \frac{31}{50} & \frac{1}{50} \\
+        \frac{193}{50} & \frac{3}{50}
+        \end{array}\right] 
+        \quad \tilde{b}=\left[
+        \begin{array}{l}51 \\
+        19\end{array}\right] 
+        \end{aligned}\\
+        5=\psi \\ 
+        \tilde{C}_{\bar{B}}^{\top}=[\frac{1}{50}-\frac{1}{50}]\\
+        B=\{x_1,x_4\}, \bar{B}=\{x_2,x_3\}\\
+\]
+
+
+È di nostro interesse solo la colonna di $x_2$, le altre non sono interessanti al fine di trovare i costi ridotto
+
+$y=A_B=C^{\top}_B$ Per calcolare $y=C^{\top}_BA_B^{-1}$
+}
+
+\[
+\begin{cases*}
+    y_1 \ \ \ =0\\ 
+    \ y_2\ =0 \\
+\end{cases*}
+\]
+
+\(
+\begin{aligned}
+    & A_B=\left[
+    \begin{array}{ll}
+        1 & 0 \\
+        0 & 1
+    \end{array}\right] \\
+    & y=\left[y_1, y_2\right]
+    \end{aligned}\\
+     \tilde{c}_{\bar{B}}^T=\left[
+        \begin{array}{ll}
+1, \frac{64}{100}
+\end{array}\right]-\left[\fcolorbox{red}{white}{$
+\begin{array}{cc}
+0 & 0
+\end{array}$}\right]\left[
+    \begin{array}{ll}
+50 & 31 \\
+-3 & 2
+\end{array}\right]=\left[\begin{array}{ll}
+\overset{c_1}{1} & \overset{c_2}{\frac{64}{100}} 
+\end{array}\right ]-\left[\begin{array}{ll}
+0 & 0
+\end{array}\right]=\left[\begin{array}{ll}
+1 & \frac{64}{100}
+\end{array}\right] \longrightarrow p=x_1
+\)
+
+
+\ex{}{
+Appena $[1,\frac{64}{100}]> 0[\underset{-3}{0}]$ Confronto con quello dopo e appena trovo un valore positivo ci si ferma
+Appena la matrice cerchiata diventa più piccola del costo, la si sceglie.
+
+ Si mette $y=C^{\top}_BA_B^{-1}$, non siamo intenzionati a calcolare la trasposta, la si porta a 
+ $y=C^{\top}_BA_B^{-1}$, una volta calcolata questa possiamo confrontare l’altra parte dei membri, 
+ ottenendo anhe la funzione obiettivo $\psi=[0,0][\underset{4}{2500}]=[0,0]$
+
+La pivot column entra in base, Pivot row esce dalla base.
+
+Data la pivot column $A_Bd=A_p$    $d=A_B^{-1}A_P=\tilde{A}_p$
+
+$A_p$ è: $A p=\left[\begin{array}{c}
+    50 \\-3\end{array}\right] d=\left[
+        \begin{array}{l}
+        d_1 \\
+        d_2\\
+        \end{array}\right] \quad
+            \begin{cases*}
+                d_1=50 \\
+                d_2=-3
+            \end{cases*}
+            \begin{array}{l}
+
+        \end{array}$
+        Questo è il pezzo di $\tilde{A}$ interessa
+
+$\tilde{b}=td>0$ Trovare il valore massimo di t facendo salire a t la variabile di pivot
+
+$$
+\begin{array}{llll}\tilde{b_1}-td_{1} \geqslant 0 & 250-t*50 \geqslant 0 & t \leqslant 5 \\\tilde{b}_2-td_{2} \geqslant 0 & 4-t(-3) \geqslant 0 & t \geqslant-\frac{4}{3}\end{array} \mid
+$$
+
+$\underset{\text{=5 nuovo }x_1}{t^*}$ è il nuovo valore di $x_p$ le altre variabili $\tilde{b}-td$        $x_4=19$
+
+}
+
+\textbf{Per far partire l’algoritmo del simplesso si fanno comparire una entità alla destra della matrice A}
+
+L’algoritmo del simplesso è migliorabile se dall’iterazione precedente è possibile migliorare ciò che si ha.
+
+In alcuni casi l’algoritmo può ciclare, per esser sicuri che ciò non accada è necessario prendere le variabili sempre in ordine
+ (\textbf{Regola di Bland}), fino ad arrivare in fondo, se un ciclo si presenta è un campanello d’allarme che non sono state prese
+le variabili in ordine corretto
+

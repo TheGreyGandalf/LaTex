@@ -1,0 +1,49 @@
+\chapter{Integer Linear Programming (ILP)}
+\section{Duale come sottoinsieme di LP}
+Il duale esiste solo nei problemi di LP, se è necessario ottenere il duale in un ILP è necessario rilassare il problema
+
+\[
+    \begin{array}{c}
+        Z(ILP)=Max \sum_{j=1}^n c_jx_j\\
+         \sum_{j=1}^n a_{ij}x_j \leqslant b_i \quad \forall i \in\{1, \ldots, n\}\\
+          \text{Variabili intere: } \fcolorbox{red}{white}{$x_j \in \mathbb{Z}_+$}, \quad \forall j \in\{1, \ldots, n\}
+    \end{array}
+\]
+
+\textbf{Soluzione ottima:}
+
+$x_1^*, x_2^*, \ldots, x_n^* \quad Z(ILP)=\sum_{j=1}^n c_j x_j^*$ Valore della soluzione
+
+\textbf{Soluzione ammissibile:}
+
+$\underline{x}_1, \underline{x}_2, \ldots, \underline{x}_n \quad \underline{z}=\sum_{i=1}^{n} c_j \underline{x}_j \rightarrow \underline{z} \leqslant z(ILP)$ Si ottiene un lowerbound
+
+\textbf{ Rilassamento continuo di un problema di ILP:}
+
+$x_j \in \mathbb{Z}_+ \Longrightarrow x_j \geqslant 0 , \quad \forall j \in\{1, \ldots, n\}$
+
+Se è un problema di ILP: z(ILP)<Z(LP), viene restituito un upperbound, in caso z(ILP)=Z(LP), l’ottimo del problema è un intero
+
+\subsection{Implicazioni tra variabili binarie}
+$x \in \{0,1\}$ if true x=1 else (if false) x=0
+
+Boolean expressions →In vincoli lineari
+\begin{enumerate}
+    \item Congiunzioni \textbf{And}
+    \item Congiunzioni \textbf{And}
+    \item Disgiunzioni \textbf{Or}
+    \item Negazioni \textbf{Not}
+\end{enumerate}
+
+\textbf{CNF: Conjunctive normal form}
+
+NOT ($x_a$ OR $x_b$) $\rightarrow$ (NOT $x_a$) AND (NOT $x_b$)
+
+NOT ($x_a$ AND $x_b$) $\rightarrow$ (NOT $x_a$) OR (NOT $x_b$)
+
+$x_a$ AND ($x_b$ OR $x_c$) $\rightarrow$ ($x_a$ AND $x_b$) OR ($x_a$ AND $x_c$)
+
+$x_a$ OR ($x_b$ OR $x_c$) $\rightarrow$ ($x_a$ OR$x_b$) AND ($x_a$ OR $x_c$)
+
+Implicazioni logiche tra variabili binarie $\rightarrow$ trasformo l’espressione in CNF, 
+per ogni disgiunzione un vincolo $\geqslant 1$ sostituisco gli **OR** con + e i **NOT** con (1-x)

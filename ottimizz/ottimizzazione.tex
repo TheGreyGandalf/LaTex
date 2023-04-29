@@ -1,0 +1,36 @@
+\documentclass{report}
+
+\usepackage{xcolor}
+\usepackage{verbatim}  
+\usepackage{amsmath}
+
+\input{preamble}
+\input{macros}
+\input{letterfonts}
+
+\title{\Huge{Some Class}\\Random Examples}
+\author{\huge{Your Name}}
+\date{}
+
+\begin{document}
+
+\maketitle
+\newpage% or \cleardoublepage
+% \pdfbookmark[<level>]{<title>}{<dest>}
+\pdfbookmark[section]{\contentsname}{toc}
+\tableofcontents
+\pagebreak
+
+\input{capitolo_1}
+\input{capitolo_2}
+\input{capitolo_3}
+\input{capitolo_4}
+\input{capitolo_5}
+\input{capitolo_6}
+\input{capitolo_7}
+\input{capitolo_8}
+    
+
+
+
+\end{document}
